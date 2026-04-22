@@ -1,0 +1,36 @@
+{% extends 'store/base.html' %}
+{% block title %}My Orders – ShopBy{% endblock %}
+
+{% block content %}
+<div class="page">
+  <h2 class="page-title">📦 My Orders</h2>
+
+  {% if orders %}
+    {% for order in orders %}
+      <div class="order-card">
+        <div class="order-header">
+          <span class="order-id">Order #{{ order.id }}</span>
+          <span class="order-status">✅ {{ order.get_status_display }}</span>
+        </div>
+        <div class="order-items-summary">
+          🛍️
+          {% for item in order.items.all %}
+            {{ item.product.emoji }} {{ item.product.name }} ×{{ item.quantity }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </div>
+        <div class="order-footer">
+          <span>{{ order.created_at|date:"M d, Y" }}</span>
+          <span class="order-total">${{ order.total }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="cart-empty">
+      <div class="cart-empty-icon">📦</div>
+      <h3>No orders yet!</h3>
+      <p>You haven't placed any orders. Go shop something cool!</p>
+      <a class="cta-btn" href="{% url 'shop' %}">Start Shopping →</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

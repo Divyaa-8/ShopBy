@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}ShopBy 🛍️{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'store/css/style.css' %}"/>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ── NAVBAR ─── -->
+<nav class="navbar">
+  <a class="nav-brand" href="{% url 'home' %}">
+    <span class="brand-icon">🛍️</span>
+    <span class="brand-text">ShopBy</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-btn" href="{% url 'home' %}">🏠 Home</a>
+    <a class="nav-btn" href="{% url 'shop' %}">🏪 Shop</a>
+    <a class="nav-btn cart-btn" href="{% url 'cart' %}">
+      🛒 Cart
+      {% with total=request.session.cart.values|length %}
+        <span class="badge">{{ request.session.cart|length }}</span>
+      {% endwith %}
+    </a>
+    {% if user.is_authenticated %}
+      <span class="user-greeting">👋 Hi, {{ user.username }}!</span>
+      <a class="nav-btn" href="{% url 'my_orders' %}">📦 Orders</a>
+      <a class="nav-btn logout-btn" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a class="nav-btn" href="{% url 'login' %}">🔑 Login</a>
+      <a class="nav-btn signup-btn" href="{% url 'register' %}">✨ Sign Up</a>
+    {% endif %}
+  </div>
+</nav>
+
+<!-- ── MESSAGES (Django flash messages) ─── -->
+{% if messages %}
+  <div class="messages-container">
+    {% for msg in messages %}
+      <div class="flash-msg flash-{{ msg.tags }}">{{ msg }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<!-- ── MAIN CONTENT ─── -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+  <p>Made with ❤️ by ShopBy &nbsp;|&nbsp; </p>
+</footer>
+
+<script src="{% static 'store/js/app.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

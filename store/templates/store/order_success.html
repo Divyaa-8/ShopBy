@@ -1,0 +1,21 @@
+{% extends 'store/base.html' %}
+{% block title %}Order Placed! – ShopBy{% endblock %}
+
+{% block content %}
+<div class="page">
+  <div class="order-success">
+    <div class="order-success-icon">🎉</div>
+    <h2>Order Placed!</h2>
+    <p>Woohoo! Your order <strong>#{{ order.id }}</strong> is confirmed!</p>
+    <p style="margin-bottom:8px">
+      Total: <strong style="color:var(--primary);font-family:'Fredoka One',cursive;font-size:26px">${{ order.total }}</strong>
+    </p>
+    <p style="color:var(--text-light);margin-bottom:30px">We'll get it to you ASAP! 📦</p>
+
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a class="cta-btn" href="{% url 'my_orders' %}">📦 View My Orders</a>
+      <a class="see-all-btn" href="{% url 'shop' %}">Keep Shopping 🛍️</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

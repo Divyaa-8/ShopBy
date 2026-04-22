@@ -1,0 +1,43 @@
+{% extends 'store/base.html' %}
+{% block title %}{{ product.name }} – ShopBy{% endblock %}
+
+{% block content %}
+<div class="page">
+  <a class="back-btn" href="{% url 'shop' %}">← Back to Shop</a>
+
+  <div class="detail-layout">
+    <div class="detail-emoji-box">{{ product.emoji }}</div>
+
+    <div class="detail-info">
+      <div class="detail-category">{{ product.category }}</div>
+      <h1 class="detail-name">{{ product.name }}</h1>
+      <div class="detail-price">${{ product.price }}</div>
+      <p class="detail-desc">{{ product.description }}</p>
+      <div class="detail-stock">In Stock: <span>{{ product.stock }} items</span></div>
+
+      <form method="POST" action="{% url 'add_to_cart' product.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'cart' %}"/>
+        <div class="qty-row">
+          <span class="qty-label">Quantity:</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+            <input type="number" id="qty-input" name="quantity" value="1" min="1" max="{{ product.stock }}" readonly/>
+            <button type="button" class="qty-btn" onclick="changeQty(1, {{ product.stock }})">+</button>
+          </div>
+        </div>
+        <button type="submit" class="big-add-btn">🛒 Add to Cart</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+function changeQty(delta, max) {
+  const input = document.getElementById('qty-input');
+  let val = parseInt(input.value) + delta;
+  val = Math.max(1, Math.min(max || 99, val));
+  input.value = val;
+}
+</script>
+{% endblock %}

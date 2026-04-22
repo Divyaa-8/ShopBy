@@ -1,0 +1,64 @@
+{% extends 'store/base.html' %}
+{% block title %}Shop – ShopBy{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <div class="shop-header">
+    <h2 class="page-title">🏪 All Products</h2>
+    <form method="GET" class="shop-controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" name="search" placeholder="Search products..." value="{{ search }}"/>
+      </div>
+      <div class="category-filter">
+        <a href="{% url 'shop' %}" class="cat-btn {% if not active_cat %}active{% endif %}">All</a>
+        {% for cat in categories %}
+          <a href="?category={{ cat.pk }}{% if search %}&search={{ search }}{% endif %}"
+             class="cat-btn {% if active_cat == cat.pk|stringformat:'s' %}active{% endif %}">
+            {{ cat.name }}
+          </a>
+        {% endfor %}
+      </div>
+      <button type="submit" class="search-submit-btn">Search</button>
+    </form>
+  </div>
+
+  {% if products %}
+    <div class="products-grid">
+      {% for product in products %}
+        <div class="product-card">
+          <a href="{% url 'product_detail' product.pk %}" class="card-link">
+            {% if product.stock <= 3 %}
+              <div class="stock-badge low">⚠️ Only {{ product.stock }} left!</div>
+            {% elif product.stock <= 8 %}
+              <div class="stock-badge">{{ product.stock }} left</div>
+            {% endif %}
+            <div class="product-emoji-box">{{ product.emoji }}</div>
+            <div class="product-info">
+              <div class="product-category">{{ product.category }}</div>
+              <div class="product-name">{{ product.name }}</div>
+              <div class="product-desc">{{ product.description|truncatewords:12 }}</div>
+              <div class="product-footer">
+                <div class="product-price">${{ product.price }}</div>
+              </div>
+            </div>
+          </a>
+          <form method="POST" action="{% url 'add_to_cart' product.pk %}" class="quick-add-form">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1"/>
+            <input type="hidden" name="next" value="{{ request.get_full_path }}"/>
+            <button type="submit" class="add-btn" title="Add to Cart">+</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="no-results">
+      <div class="no-results-icon">😕</div>
+      <p>No products found! <a href="{% url 'shop' %}">Clear search</a></p>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

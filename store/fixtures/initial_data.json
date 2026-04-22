@@ -1,0 +1,23 @@
+[
+  {"model": "store.category", "pk": 1, "fields": {"name": "Clothing"}},
+  {"model": "store.category", "pk": 2, "fields": {"name": "Electronics"}},
+  {"model": "store.category", "pk": 3, "fields": {"name": "Accessories"}},
+  {"model": "store.category", "pk": 4, "fields": {"name": "Footwear"}},
+  {"model": "store.category", "pk": 5, "fields": {"name": "Kitchen"}},
+  {"model": "store.category", "pk": 6, "fields": {"name": "Home"}},
+  {"model": "store.category", "pk": 7, "fields": {"name": "Sports"}},
+  {"model": "store.category", "pk": 8, "fields": {"name": "Stationery"}},
+
+  {"model": "store.product", "pk": 1,  "fields": {"name": "Cozy Hoodie",      "description": "Super soft and warm hoodie for chilly days. Available in multiple sizes!",          "price": "29.99", "emoji": "👕", "category": 1, "stock": 15}},
+  {"model": "store.product", "pk": 2,  "fields": {"name": "Wireless Earbuds", "description": "Crystal clear sound with 8 hour battery life. Perfect for music lovers.",            "price": "49.99", "emoji": "🎧", "category": 2, "stock": 8}},
+  {"model": "store.product", "pk": 3,  "fields": {"name": "Cool Sunglasses",  "description": "Stylish UV400 protection sunglasses. Look great, protect your eyes!",               "price": "19.99", "emoji": "🕶️", "category": 3, "stock": 20}},
+  {"model": "store.product", "pk": 4,  "fields": {"name": "Leather Backpack", "description": "Sturdy and stylish backpack with lots of pockets. Great for school or work!",        "price": "59.99", "emoji": "🎒", "category": 3, "stock": 5}},
+  {"model": "store.product", "pk": 5,  "fields": {"name": "Running Shoes",    "description": "Lightweight and comfortable shoes perfect for jogging or everyday wear.",            "price": "79.99", "emoji": "👟", "category": 4, "stock": 12}},
+  {"model": "store.product", "pk": 6,  "fields": {"name": "Coffee Mug",       "description": "Large 16oz ceramic mug for your morning coffee or tea. Dishwasher safe!",           "price": "14.99", "emoji": "☕", "category": 5, "stock": 30}},
+  {"model": "store.product", "pk": 7,  "fields": {"name": "Plant Pot Set",    "description": "Set of 3 cute ceramic pots for your indoor plants. Great gift idea!",               "price": "24.99", "emoji": "🪴", "category": 6, "stock": 18}},
+  {"model": "store.product", "pk": 8,  "fields": {"name": "Yoga Mat",         "description": "Non-slip 6mm thick yoga mat. Perfect for beginners and pros alike!",                "price": "34.99", "emoji": "🧘", "category": 7, "stock": 10}},
+  {"model": "store.product", "pk": 9,  "fields": {"name": "Notebook Set",     "description": "Pack of 3 dotted notebooks. Perfect for journaling, sketching, or notes.",          "price": "17.99", "emoji": "📓", "category": 8, "stock": 25}},
+  {"model": "store.product", "pk": 10, "fields": {"name": "Phone Stand",      "description": "Adjustable aluminum phone and tablet stand. Works with all devices!",               "price": "22.99", "emoji": "📱", "category": 2, "stock": 14}},
+  {"model": "store.product", "pk": 11, "fields": {"name": "Scented Candle",   "description": "Hand-poured soy wax candle with calming lavender scent. Burns for 40 hours!",      "price": "18.99", "emoji": "🕯️", "category": 6, "stock": 22}},
+  {"model": "store.product", "pk": 12, "fields": {"name": "Water Bottle",     "description": "Insulated stainless steel bottle keeps drinks cold 24hrs, hot 12hrs.",              "price": "27.99", "emoji": "🍶", "category": 7, "stock": 16}}
+]

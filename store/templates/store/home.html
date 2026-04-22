@@ -1,0 +1,84 @@
+{% extends 'store/base.html' %}
+{% block title %}ShopBy 🛍️ – Shop Cool Stuff{% endblock %}
+
+{% block content %}
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">✨ New Arrivals Just Dropped!</div>
+      <h1 class="hero-title">Shop the <span class="highlight">Coolest</span><br/>Stuff Online 🎉</h1>
+      <p class="hero-sub">Discover amazing products at prices you'll love. No weird fees, just good vibes!</p>
+      <a class="cta-btn" href="{% url 'shop' %}">Start Shopping →</a>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-cards">
+        <div class="float-card c1">👕<br/><small>Clothing</small></div>
+        <div class="float-card c2">🎧<br/><small>Electronics</small></div>
+        <div class="float-card c3">🎒<br/><small>Accessories</small></div>
+        <div class="float-card c4">🏃<br/><small>Sports</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="feature-card">
+      <div class="feat-icon">🚀</div>
+      <h3>Fast Delivery</h3>
+      <p>Get your stuff in 2–3 days, no waiting around forever!</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🔒</div>
+      <h3>Safe & Secure</h3>
+      <p>Your info stays private. We keep things locked down tight.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">💸</div>
+      <h3>Best Prices</h3>
+      <p>We search everywhere so you always get the best deal!</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">😊</div>
+      <h3>Easy Returns</h3>
+      <p>Not happy? Return it free within 30 days, no questions!</p>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="featured-section">
+    <h2 class="section-title">🔥 Hot Right Now</h2>
+    <div class="products-grid">
+      {% for product in featured %}
+        <div class="product-card">
+          <a href="{% url 'product_detail' product.pk %}" class="card-link">
+            {% if product.stock <= 3 %}
+              <div class="stock-badge low">⚠️ Only {{ product.stock }} left!</div>
+            {% elif product.stock <= 8 %}
+              <div class="stock-badge">{{ product.stock }} left</div>
+            {% endif %}
+            <div class="product-emoji-box">{{ product.emoji }}</div>
+            <div class="product-info">
+              <div class="product-category">{{ product.category }}</div>
+              <div class="product-name">{{ product.name }}</div>
+              <div class="product-desc">{{ product.description|truncatewords:12 }}</div>
+              <div class="product-footer">
+                <div class="product-price">${{ product.price }}</div>
+              </div>
+            </div>
+          </a>
+          <form method="POST" action="{% url 'add_to_cart' product.pk %}" class="quick-add-form">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1"/>
+            <input type="hidden" name="next" value="/"/>
+            <button type="submit" class="add-btn" title="Add to Cart">+</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+    <a class="see-all-btn" href="{% url 'shop' %}">See All Products 🛍️</a>
+  </section>
+
+</div>
+{% endblock %}
