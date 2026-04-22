@@ -1,4 +1,4 @@
-# 🛍️ Shopzy – Django E-Commerce Store
+# 🛍️ ShopBy – E-Commerce Store
 
 A fun, beginner-friendly e-commerce store built with **Django + SQLite**.
 
